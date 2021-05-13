@@ -26,7 +26,7 @@ public class ProjectCreationTest extends BaseTest {
         new MyProjectsPage(driver).createProject();
 
         new ProjectCreationPage(driver)
-                .fillName("name111")
+                .fillName("name11111")
                 .openListOrganization()
                 .selectOrganization("123test")
                 .openListContacts()
