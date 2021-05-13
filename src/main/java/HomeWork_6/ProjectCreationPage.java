@@ -24,8 +24,7 @@ public class ProjectCreationPage extends BaseView {
 
     @FindBy(xpath = "//*[text()='Укажите организацию']")
     public WebElement listOrganizations;
-    public ProjectCreationPage openListOrganization() throws InterruptedException {
-        Thread.sleep(5000);
+    public ProjectCreationPage openListOrganization() {
         listOrganizations.click();
         return this;
     }
@@ -33,18 +32,20 @@ public class ProjectCreationPage extends BaseView {
     @FindBy(css = "#select2-drop>div>input")
     public WebElement organization;
 
-    public ProjectCreationPage selectOrganization(String nameOrganization) throws InterruptedException {
+    public ProjectCreationPage selectOrganization(String nameOrganization) {
         organization.sendKeys(nameOrganization);
-        Thread.sleep(3000);
+        webDriverWait.until
+                (ExpectedConditions.visibilityOfElementLocated(new ProjectCreationPage(driver).loadWindow));
         organization.sendKeys(Keys.ENTER);
+        webDriverWait.until(
+                ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='select2-container select2']/a")));
         return this;
     }
 
     @FindBy(xpath = "//div[@class='select2-container select2']/a")
     public WebElement listContacts;
 
-    public ProjectCreationPage openListContacts() throws InterruptedException {
-        Thread.sleep(3000);
+    public ProjectCreationPage openListContacts() {
         listContacts.click();
         return this;
     }
@@ -52,8 +53,11 @@ public class ProjectCreationPage extends BaseView {
     @FindBy(css = "#select2-drop>div>input")
     public WebElement contact;
 
-    public ProjectCreationPage selectContact(String nameContact) {
+    public ProjectCreationPage selectContact(String nameContact) throws InterruptedException {
         contact.sendKeys(nameContact);
+        Thread.sleep(2000);
+//        webDriverWait.until
+//                (ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[text()='"+nameContact+"']")));
         organization.sendKeys(Keys.ENTER);
         return this;
     }
@@ -106,5 +110,6 @@ public class ProjectCreationPage extends BaseView {
 
     public static final String requestSuccessLocator = "//*[text()='Проект сохранен']";
 
-    public By loadFinishLocator = By.xpath("//span[text()='Укажите организацию']/..");
-}
+    public By loadFinishLocator = By.xpath("//input[@name='crm_project[name]']");
+    public By loadWindow = By.cssSelector("div.loader-content");
+    }

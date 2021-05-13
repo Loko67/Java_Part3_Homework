@@ -1,5 +1,6 @@
 package HomeWork6;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +18,8 @@ public class ProjectsSubMenu extends BaseView {
         myProjects.click();
         webDriverWait.until(
                 ExpectedConditions.presenceOfElementLocated(new MyProjectsPage(driver).createProjectButtonLocator));
+        webDriverWait.until
+                (ExpectedConditions.invisibilityOfElementLocated(new ProjectCreationPage(driver).loadWindow));
     }
 
 }

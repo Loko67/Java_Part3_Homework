@@ -16,7 +16,10 @@ public class MyProjectsPage extends BaseView{
 
     public void createProject() {
         createProjectButton.click();
-        webDriverWait.until(ExpectedConditions.elementToBeClickable(new ProjectCreationPage(driver).loadFinishLocator));
+        webDriverWait.until
+                (ExpectedConditions.elementToBeClickable(new ProjectCreationPage(driver).loadFinishLocator));
+        webDriverWait.until
+                (ExpectedConditions.invisibilityOfElementLocated(new ProjectCreationPage(driver).loadWindow));
     }
 
     public By createProjectButtonLocator = By.xpath("//a[text()='Создать проект']");
