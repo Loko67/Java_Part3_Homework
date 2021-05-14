@@ -8,6 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import static HomeWork6.Configuration.loadWindow;
+
 public class ProjectCreationPage extends BaseView {
 
     public ProjectCreationPage(WebDriver driver) {
@@ -32,10 +34,11 @@ public class ProjectCreationPage extends BaseView {
     @FindBy(css = "#select2-drop>div>input")
     public WebElement organization;
 
-    public ProjectCreationPage selectOrganization(String nameOrganization) {
+    public ProjectCreationPage selectOrganization(String nameOrganization) throws InterruptedException {
         organization.sendKeys(nameOrganization);
+        Thread.sleep(2000);
         webDriverWait.until
-                (ExpectedConditions.visibilityOfElementLocated(new ProjectCreationPage(driver).loadWindow));
+                (ExpectedConditions.invisibilityOfElementLocated(loadWindow));
         organization.sendKeys(Keys.ENTER);
         webDriverWait.until(
                 ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='select2-container select2']/a")));
@@ -111,5 +114,4 @@ public class ProjectCreationPage extends BaseView {
     public static final String requestSuccessLocator = "//*[text()='Проект сохранен']";
 
     public By loadFinishLocator = By.xpath("//input[@name='crm_project[name]']");
-    public By loadWindow = By.cssSelector("div.loader-content");
     }

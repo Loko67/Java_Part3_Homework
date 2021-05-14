@@ -16,26 +16,8 @@ public class LoginPage extends BaseView {
     @FindBy(id = "_submit")
     public WebElement buttonSubmit;
 
-
-    public WebElement testFindBys;
-
     public LoginPage(WebDriver driver) {
         super(driver);
-    }
-
-    public LoginPage fillInputLogin(String login) {
-        inputLogin.sendKeys(login);
-        return this;
-    }
-
-    public LoginPage fillInputPassword(String password) {
-        inputPassword.sendKeys(password);
-        return this;
-    }
-
-    public MainPage submitLogin() {
-        buttonSubmit.click();
-        return new MainPage(driver);
     }
 
     public MainPage login(String login, String password) {

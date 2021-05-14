@@ -6,7 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class MyProjectsPage extends BaseView{
+import static HomeWork6.Configuration.loadWindow;
+
+public class MyProjectsPage extends BaseView {
     public MyProjectsPage(WebDriver driver) {
         super(driver);
     }
@@ -19,7 +21,7 @@ public class MyProjectsPage extends BaseView{
         webDriverWait.until
                 (ExpectedConditions.elementToBeClickable(new ProjectCreationPage(driver).loadFinishLocator));
         webDriverWait.until
-                (ExpectedConditions.invisibilityOfElementLocated(new ProjectCreationPage(driver).loadWindow));
+                (ExpectedConditions.invisibilityOfElementLocated(loadWindow));
     }
 
     public By createProjectButtonLocator = By.xpath("//a[text()='Создать проект']");
